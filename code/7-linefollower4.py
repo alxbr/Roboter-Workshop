@@ -8,7 +8,7 @@ import time # Import the Time library
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 # Set variables for the GPIO motor pins
-# changed by Alex for CamJam Board v1
+# changed by Alex for the Ryanteck Board
 pinMotorAForwards = 18
 pinMotorABackwards = 17
 pinMotorBForwards = 23
