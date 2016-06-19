@@ -9,10 +9,10 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 # Set variables for the GPIO motor pins
 # changed by Alex for the Ryanteck Board
-pinMotorAForwards = 18
-pinMotorABackwards = 17
-pinMotorBForwards = 23
-pinMotorBBackwards = 22
+pinMotorAForwards = 17
+pinMotorABackwards = 18
+pinMotorBForwards = 22
+pinMotorBBackwards = 23
 
 
 # Set variables for the line detector GPIO pin
@@ -21,8 +21,8 @@ pinLineFollower = 25
 Frequency = 20
 # How long tHe pin stays on each cycle, as a percent
 # changed by Alex
-DutyCycleA = 20
-DutyCycleB = 27
+DutyCycleA = 60
+DutyCycleB = 50
 # Setting the duty cycle to 0 means the motors will not turn
 Stop = 0
 
@@ -66,12 +66,12 @@ def Left():
     pwmMotorAForwards.ChangeDutyCycle(Stop)
     pwmMotorABackwards.ChangeDutyCycle(DutyCycleA)
 #    pwmMotorBForwards.ChangeDutyCycle(DutyCycleB) # changed by Alex: rotation with looking back in the turn
-    pwmMotorBForwards.ChangeDutyCycle(DutyCycleB/4) 
+    pwmMotorBForwards.ChangeDutyCycle(DutyCycleB) 
     pwmMotorBBackwards.ChangeDutyCycle(Stop)
 # Turn Right
 def Right():
 #    pwmMotorAForwards.ChangeDutyCycle(DutyCycleA) # changed by Alex: rotation with looking back in the turn
-    pwmMotorAForwards.ChangeDutyCycle(DutyCycleA/4)
+    pwmMotorAForwards.ChangeDutyCycle(DutyCycleA)
     pwmMotorABackwards.ChangeDutyCycle(Stop)
     pwmMotorBForwards.ChangeDutyCycle(Stop)
     pwmMotorBBackwards.ChangeDutyCycle(DutyCycleB)
@@ -86,9 +86,9 @@ def SeekLine():
 	print("Seeking the line")
 	# The direction the robot will turn - True = Left
 	Direction = True
-	SeekSize = 0.2 # Turn for 0.25s
+	SeekSize = 0.33 # Turn for 0.25s
 	SeekCount = 1 # A count of times the robot has looked for the line
-	MaxSeekCount = 5 # The maximum time to seek the line in one direction
+	MaxSeekCount = 7 # The maximum time to seek the line in one direction
 	# Turn the robot left and right until it finds the line
 	# Or it has been searched for long enough
 	while SeekCount <= MaxSeekCount:
