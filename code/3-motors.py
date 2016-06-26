@@ -10,10 +10,11 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
 # Set variables for the GPIO motor pins
-pinMotorAForwards = 10
-pinMotorABackwards = 9
-pinMotorBForwards = 8
-pinMotorBBackwards = 7
+# changed by Alex for the Ryanteck Board
+pinMotorAForwards = 17	# right motor +
+pinMotorABackwards = 18	# right motor -
+pinMotorBForwards = 22	# left motor +
+pinMotorBBackwards = 23	# left motor -
 
 # Set the GPIO Pin mode
 GPIO.setup(pinMotorAForwards, GPIO.OUT)
@@ -23,17 +24,17 @@ GPIO.setup(pinMotorBBackwards, GPIO.OUT)
 
 # Turn all motors off
 def StopMotors():
-    GPIO.output(pinMotorAForwards, 0)
-    GPIO.output(pinMotorABackwards, 0)
-    GPIO.output(pinMotorBForwards, 0)
-    GPIO.output(pinMotorBBackwards, 0)
+	GPIO.output(pinMotorAForwards, 0)
+	GPIO.output(pinMotorABackwards, 0)
+	GPIO.output(pinMotorBForwards, 0)
+	GPIO.output(pinMotorBBackwards, 0)
     
 # Turn both motors forwards
 def Forwards():
-    GPIO.output(pinMotorAForwards, 1)
-    GPIO.output(pinMotorABackwards, 0)
-    GPIO.output(pinMotorBForwards, 1)
-    GPIO.output(pinMotorBBackwards, 0)
+	GPIO.output(pinMotorAForwards, 1)
+	GPIO.output(pinMotorABackwards, 0)
+	GPIO.output(pinMotorBForwards, 1)
+	GPIO.output(pinMotorBBackwards, 0)
     
 # Turn both motors backwards
 def Backwards():
@@ -43,28 +44,39 @@ def Backwards():
 	GPIO.output(pinMotorBBackwards, 1)
 	
 # Turn left
-def Left():
-    GPIO.output(pinMotorAForwards, 0)
-    GPIO.output(pinMotorABackwards, 1)
-    GPIO.output(pinMotorBForwards, 1)
-    GPIO.output(pinMotorBBackwards, 0)
+def Right():
+	GPIO.output(pinMotorAForwards, 0)
+	GPIO.output(pinMotorABackwards, 1)
+	GPIO.output(pinMotorBForwards, 1)
+	GPIO.output(pinMotorBBackwards, 0)
     
 # Turn Right
-def Right():
-    GPIO.output(pinMotorAForwards, 1)
-    GPIO.output(pinMotorABackwards, 0)
-    GPIO.output(pinMotorBForwards, 0)
-    GPIO.output(pinMotorBBackwards, 1)
+def Left():
+	GPIO.output(pinMotorAForwards, 1)
+	GPIO.output(pinMotorABackwards, 0)
+	GPIO.output(pinMotorBForwards, 0)
+	GPIO.output(pinMotorBBackwards, 1)
 
+print "Turn both motors forwards for one second"
 Forwards()
 time.sleep(1) # Pause for 1 second
+
+print "Turn left for one second"
 Left()
-time.sleep(0.5) # Pause for half a second
+time.sleep(1) # Pause for half a second
+
+print "Turn both motors forwards for one second"
 Forwards()
 time.sleep(1)
+
+print "Turn right for one second"
 Right()
-time.sleep(0.5)
+time.sleep(1)
+
+print "Turn both motors backwards for one second"
 Backwards()
-time.sleep(0.5)
+time.sleep(1)
+
+print "Stop"
 StopMotors()
 GPIO.cleanup()
